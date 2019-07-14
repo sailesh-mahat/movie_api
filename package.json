@@ -19,7 +19,9 @@
   "homepage": "https://github.com/sailesh-mahat/movie_api#readme",
   "dependencies": {
     "body": "^5.1.0",
+    "body-parser": "^1.19.0",
     "express": "^4.17.1",
-    "morgan": "^1.9.1"
+    "morgan": "^1.9.1",
+    "uuid": "^3.3.2"
   }
 }

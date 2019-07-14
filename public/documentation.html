@@ -10,5 +10,47 @@
     <p>This API is built to help provide users with access to information about
     different movies, directors, and genres. Users will be able to sign up,
     update their personal information, and create a list of their favorite movies.</p>
+    <h2>The endpoints</h2>
+    <ul>
+      <li>/</li>
+      <li>/movies</li>
+      <li>/movie/[title]</li>
+      <li>/genres</li>
+      <li>/genres/[name]</li>
+      <li>/directors</li>
+      <li>/directors/[name]</li>
+      <li>/Users</li>
+      <li>/users/[id]</li>
+      <li>/users/[id]/[movie_id]</li>
+    </ul>
+    <h2>The Methods available for each endpoint</h2>
+    <ul>
+      <li>/: GET : takes you to the homepage of myFlix</li>
+      <li>/movies: GET : returns a list of movies available on myFlix</li>
+      <li>/movies/[title]: GET : to see the description of a movie by title. Eg: http://localhost:8080/movies/Aladdin</li>
+      <li>/genres: GET : to see the available genres</li>
+      <li>/genres/[name]: GET : to see the description of a genre by name. Eg:http://localhost:8080/genres/Comedy</li>
+      <li>/directors: GET : to see the list of all directors</li>
+      <li>/directors/[name]: GET : to get the description of a director by name. Eg: http://localhost:8080/directors/Tim%20Burton</li>
+      <li>/users: GET : returns a list of all users.</li>
+      <li>/users: POST : add a new user with JSON format in request body. Eg:
+                                                                            {
+                                                                            	"name": "Kritika",
+                                                                            	"username": "kitkat",
+                                                                            	"password": "",
+                                                                            	"email": "abc@xyz.com",
+                                                                            	"birthday": "",
+                                                                            	"favorites": []
+                                                                            }</li>
+        <li>/users/[id]: PUT : updates user info by id. Eg: First : http://localhost:8080/users/042e5237-de6a-48f1-aea2-922fc3174259,
+          then JSON format in request body : {
+                                              	"name": "Sailesh",
+                                              	"email": "azs@ffn.com",
+                                              	"favorites": [4]
+                                              }</li>
+        <li>/users/[id]: DELETE : deletes a user (deregister) by user id. Eg: http://localhost:8080/users/042e5237-de6a-48f1-aea2-922fc3174259</li>
+        <li>/users/[id]/[movie_id]: POST : Adds a movie to favorites. Eg: http://localhost:8080/users/042e5237-de6a-48f1-aea2-922fc3174259/6</li>
+        <li>/users/[id]/[movie_id]: DELETE : removes a movie from favorites. Eg: http://localhost:8080/users/042e5237-de6a-48f1-aea2-922fc3174259/6</li>
+    </ul>
   </body>
 </html>
