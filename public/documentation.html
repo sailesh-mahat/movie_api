@@ -14,12 +14,12 @@
     <ul>
       <li>/</li>
       <li>/movies</li>
-      <li>/movie/[title]</li>
-      <li>/genres</li>
-      <li>/genres/[name]</li>
-      <li>/directors</li>
-      <li>/directors/[name]</li>
-      <li>/Users</li>
+      <li>/movies/[title]</li>
+      <li>/Genre</li>
+      <li>/Genre/[name]</li>
+      <li>/Director</li>
+      <li>/Director/[name]</li>
+      <li>/users</li>
       <li>/users/[id]</li>
       <li>/users/[id]/[movie_id]</li>
     </ul>
@@ -28,10 +28,10 @@
       <li>/: GET : takes you to the homepage of myFlix</li>
       <li>/movies: GET : returns a list of movies available on myFlix</li>
       <li>/movies/[title]: GET : to see the description of a movie by title. Eg: http://localhost:8080/movies/Aladdin</li>
-      <li>/genres: GET : to see the available genres</li>
-      <li>/genres/[name]: GET : to see the description of a genre by name. Eg:http://localhost:8080/genres/Comedy</li>
-      <li>/directors: GET : to see the list of all directors</li>
-      <li>/directors/[name]: GET : to get the description of a director by name. Eg: http://localhost:8080/directors/Tim%20Burton</li>
+      <li>/Genre: GET : to see the available genres</li>
+      <li>/Genre/[name]: GET : to see the description of a genre by name. Eg:http://localhost:8080/genres/Comedy</li>
+      <li>/Director: GET : to see the list of all directors</li>
+      <li>/Director/[name]: GET : to get the description of a director by name. Eg: http://localhost:8080/directors/Tim%20Burton</li>
       <li>/users: GET : returns a list of all users.</li>
       <li>/users: POST : add a new user with JSON format in request body. Eg:
                                                                             {

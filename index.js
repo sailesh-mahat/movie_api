@@ -35,7 +35,7 @@ let movies = [ {
     id: '0',
     title : 'Spider-Man: Far From Home',
     Descrition: '',
-    Genre: '',
+    Genre: 'Action',
     ImageURL: '',
     director : 'Jon Watts',
     actors : 'Tom Holland, Samuel L. Jackson'
@@ -44,7 +44,7 @@ let movies = [ {
     id: '1',
     title : 'Toy Story 4',
     Descrition: '',
-    Genre: '',
+    Genre: 'Animation',
     ImageURL: '',
     director : 'Josh Cooley',
     actors : 'Tom Hanks, Tim Allen'
@@ -53,7 +53,7 @@ let movies = [ {
     id: '2',
     title : 'Yesterday',
     Descrition: '',
-    Genre: '',
+    Genre: 'Comedy',
     ImageURL: '',
     director : 'Danny Boyle',
     actors : 'Himesh Patel, Lily James'
@@ -62,7 +62,7 @@ let movies = [ {
     id: '3',
     title : 'Annabelle Comes Home',
     Descrition: '',
-    Genre: '',
+    Genre: 'Horror',
     ImageURL: '',
     director : 'Gary Dauberman',
     actors : 'Vera Farmiga, Patrick Wilson'
@@ -71,7 +71,7 @@ let movies = [ {
     id: '4',
     title : 'Aladdin',
     Descrition: '',
-    Genre: '',
+    Genre: 'Fantasy',
     ImageURL: '',
     director : 'Guy Ritchie',
     actors : 'Will Smith, Mena Massoud'
@@ -80,7 +80,7 @@ let movies = [ {
     id: '5',
     title : 'Midsommar',
     Descrition: '',
-    Genre: '',
+    Genre: 'Horror',
     ImageURL: '',
     director : 'Ari Aster',
     actors : 'Florence Pugh, Jack Reynor'
@@ -89,7 +89,7 @@ let movies = [ {
     id: '6',
     title : 'The Secret Life of Pets 2',
     Descrition: '',
-    Genre: '',
+    Genre: 'Animation',
     ImageURL: '',
     director : 'Chris Renaud',
     actors : 'Patton Oswalt, Kevin Hart'
@@ -98,7 +98,7 @@ let movies = [ {
     id: '7',
     title : 'Men In Black: International',
     Descrition: '',
-    Genre: '',
+    Genre: 'Action',
     ImageURL: '',
     director : 'F. Gary Gary',
     actors : 'Chris Hemsworth, Tessa Thompson'
@@ -107,7 +107,7 @@ let movies = [ {
     id: '8',
     title : 'Avengers: Endgame',
     Descrition: '',
-    Genre: '',
+    Genre: 'Action',
     ImageURL: '',
     director : 'Anthony Russo',
     actors : 'Robert Downey Jr., Chris Evans'
@@ -116,7 +116,7 @@ let movies = [ {
     id: '9',
     title : 'Rocketman',
     Descrition: '',
-    Genre: '',
+    Genre: 'Biography',
     ImageURL: '',
     director : 'Dexter Fletcher',
     actors : 'Taron Egerton, Jamie Bell'
