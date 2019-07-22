@@ -12,45 +12,47 @@
     update their personal information, and create a list of their favorite movies.</p>
     <h2>The endpoints</h2>
     <ul>
-      <li>/</li>
       <li>/movies</li>
-      <li>/movies/[title]</li>
-      <li>/Genre</li>
-      <li>/Genre/[name]</li>
-      <li>/Director</li>
-      <li>/Director/[name]</li>
+      <li>/movies/[Title]</li>
+
+      <li>/genres/[Name]</li>
+
+      <li>movies/directors/[Name]</li>
       <li>/users</li>
-      <li>/users/[id]</li>
-      <li>/users/[id]/[movie_id]</li>
+      <li>/users/[Username]</li>
+      <li>/users/[Username]//movies/[movie_id]</li>
     </ul>
     <h2>The Methods available for each endpoint</h2>
     <ul>
-      <li>/: GET : takes you to the homepage of myFlix</li>
       <li>/movies: GET : returns a list of movies available on myFlix</li>
       <li>/movies/[title]: GET : to see the description of a movie by title. Eg: http://localhost:8080/movies/Aladdin</li>
-      <li>/Genre: GET : to see the available genres</li>
-      <li>/Genre/[name]: GET : to see the description of a genre by name. Eg:http://localhost:8080/genres/Comedy</li>
-      <li>/Director: GET : to see the list of all directors</li>
-      <li>/Director/[name]: GET : to get the description of a director by name. Eg: http://localhost:8080/directors/Tim%20Burton</li>
-      <li>/users: GET : returns a list of all users.</li>
+
+      <li>/genres/[Name]: GET : to see the description of a genre by name. Eg:http://localhost:8080/genres/Comedy</li>
+
+      <li>movies/directors/[Name]: GET : to get the description of a director by name. Eg: http://localhost:8080/directors/Tim%20Burton</li>
+
       <li>/users: POST : add a new user with JSON format in request body. Eg:
-                                                                            {
-                                                                            	"name": "Kritika",
-                                                                            	"username": "kitkat",
-                                                                            	"password": "",
-                                                                            	"email": "abc@xyz.com",
-                                                                            	"birthday": "",
-                                                                            	"favorites": []
-                                                                            }</li>
-        <li>/users/[id]: PUT : updates user info by id. Eg: First : http://localhost:8080/users/042e5237-de6a-48f1-aea2-922fc3174259,
-          then JSON format in request body : {
-                                              	"name": "Sailesh",
-                                              	"email": "azs@ffn.com",
-                                              	"favorites": [4]
-                                              }</li>
-        <li>/users/[id]: DELETE : deletes a user (deregister) by user id. Eg: http://localhost:8080/users/042e5237-de6a-48f1-aea2-922fc3174259</li>
-        <li>/users/[id]/[movie_id]: POST : Adds a movie to favorites. Eg: http://localhost:8080/users/042e5237-de6a-48f1-aea2-922fc3174259/6</li>
-        <li>/users/[id]/[movie_id]: DELETE : removes a movie from favorites. Eg: http://localhost:8080/users/042e5237-de6a-48f1-aea2-922fc3174259/6</li>
+                                                                              {
+                                                                              	"Username": "DancingQueen21",
+                                                                              	"Password": "Iloveme",
+                                                                              	"Email": "DianaK24@live.com",
+                                                                              	"Birthday": "1988-04-13T00:00:00.000Z"
+                                                                              }<br>
+          New user data including user ID in JSON format is the response to the client.</li>
+        <li>/users/[Username]: PUT : updates user info by Username. Eg: First go to URL: http://localhost:8080/users/DancingQueen21,
+          then type JSON format in request body :{
+                                                  	"Username": "DancingQueen21",
+                                                  	"Password": "Ilovemeandyou",
+                                                  	"Email": "DianaK24@live.com",
+                                                  	"Birthday": "1988-04-13T00:00:00.000Z"
+                                                  }<br>
+        Updated user data in JSON format is the response to the client.</li>
+        <li>/users/[Username]: DELETE : deletes a user (deregister) by user id. Eg: http://localhost:8080/users/DancingQueen21.
+        The response is a message indicating user has been deleted</li>
+        <li>/users/[Username]/movies/[movie_id]: POST : Adds a movie to favorites. Eg: http://localhost:8080/users/layla234/movies/5d30775be25340d93bbb6b45.
+        A user data in JSON format including newly added movie (ID) is the response to the client. </li>
+        <li>/users/[Username]/movies/[movie_id]: DELETE : Removes a movie from favorites. Eg: http://localhost:8080/users/Pravinth/movies/5d30775be25340d93bbb6b45.
+        Updated user data in JSON format with requested movie removed from the user's favorite movies list is the response to the client.</li>
     </ul>
   </body>
 </html>
