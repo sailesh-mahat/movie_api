@@ -22,7 +22,9 @@ app.use(validator());
 const Movies = Models.Movie;
 const Users = Models.User;
 // allows Mongoose to connect to the database thus integrating it with the REST API
-mongoose.connect('mongodb://localhost:27017/myFlixDB', {useNewUrlParser: true});
+//mongoose.connect('mongodb://localhost:27017/myFlixDB', {useNewUrlParser: true});
+
+mongoose.connect('mongodb+srv://myflixadmin:regmisucks@cluster0-d8k8e.mongodb.net/myFlixDB?retryWrites=true&w=majority', {useNewUrlParser: true});
 
 app.use(bodyParser.json());
 
