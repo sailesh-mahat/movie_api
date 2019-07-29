@@ -49,6 +49,10 @@ app.use(cors({
 
 //using mongoose logic
 
+app.get('/', function (req, res) {
+  res.send('Welcome to MyFlix!');
+});
+
 //Returns a JSON object containing data about all users
 app.get('/users', passport.authenticate('jwt', { session: false }), function(req, res) {
   Users.find()
