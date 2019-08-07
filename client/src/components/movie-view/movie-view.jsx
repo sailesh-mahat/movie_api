@@ -32,7 +32,7 @@ export class MovieView extends React.Component {
           <div className="label">Director</div>
           <div className="value">{movie.Director.Name}</div>
         </div>
-        <button onClick={() => onClick()}>BACK</button>
+        <button onClick={() => this.props.returnCallback()}>BACK</button>
        </div>
     );
   }
