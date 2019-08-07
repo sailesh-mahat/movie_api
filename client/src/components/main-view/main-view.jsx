@@ -42,7 +42,7 @@ getMainView() {
 }
 
   render() {
-    //if the sate isn't initialized, this will throw on runtime
+    //if the state isn't initialized, this will throw on runtime
     //before the data is initially loaded
     const { movies, selectedMovie } = this.state;
 
