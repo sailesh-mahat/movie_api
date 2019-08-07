@@ -35,7 +35,7 @@ constructor() {
     });
   }
 
-ResetMainView() {
+getMainView() {
   this.setState({
     selectedMovie: null
   });
@@ -52,7 +52,7 @@ ResetMainView() {
     return (
       <div className="main-view">
         {selectedMovie
-            ? <MovieView returnCallback={() => this.ResetMainView()} movie={selectedMovie}/>
+            ? <MovieView movie={selectedMovie} onClick={button => this.getMainView()}/>
             : movies.map(movie => (
               <MovieCard key={movie._id} movie={movie} onClick={movie => this.onMovieClick(movie)}/>
             ))
