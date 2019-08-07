@@ -35,6 +35,12 @@ constructor() {
     });
   }
 
+ResetMainView() {
+  this.setState({
+    selectedMovie: null
+  });
+}
+
   render() {
     //if the sate isn't initialized, this will throw on runtime
     //before the data is initially loaded
@@ -46,7 +52,7 @@ constructor() {
     return (
       <div className="main-view">
         {selectedMovie
-            ? <MovieView movie={selectedMovie}/>
+            ? <MovieView returnCallback={() => this.ResetMainView()} movie={selectedMovie}/>
             : movies.map(movie => (
               <MovieCard key={movie._id} movie={movie} onClick={movie => this.onMovieClick(movie)}/>
             ))
