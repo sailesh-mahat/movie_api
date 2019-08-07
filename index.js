@@ -65,8 +65,8 @@ app.get('/users', passport.authenticate('jwt', { session: false }), function(req
   });
 });
 //Returns a JSON object containing data about all movies
-app.get('/movies', passport.authenticate('jwt', { session: false }), function(req, res) {
-  Movies.find()
+app.get('/movies', function(req, res) {
+  Movies.find() 
   .then(function(movies) {
     res.status(201).json(movies)
   })
@@ -77,7 +77,7 @@ app.get('/movies', passport.authenticate('jwt', { session: false }), function(re
 });
 
 //Return data about a single movie by title
-app.get('/movies/:Title', function(req, res) {
+app.get('/movies/:Title', passport.authenticate('jwt', { session: false }), function(req, res) {
   Movies.findOne({ Title : req.params.Title })
   .then(function(movie) {
     res.json(movie)
