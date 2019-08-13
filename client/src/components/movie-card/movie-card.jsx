@@ -13,8 +13,6 @@ export class MovieCard extends React.Component {
 
     return (
       <Card onClick={() => onClick(movie)} variant='link'style={{ width: '16rem' }}>
-
-
         <Card.Body>
           <Card.Img variant="top" src={movie.Imagepath} />
           <Card.Title>{movie.Title}</Card.Title>
@@ -25,3 +23,12 @@ export class MovieCard extends React.Component {
     );
   }
 }
+
+MovieCard.propTypes = {
+    movie: PropTypes.shape({
+        Title: PropTypes.string,
+        ImagePath: PropTypes.string,
+        Description: PropTypes.string
+    }).isRequired,
+    onClick: PropTypes.func.isRequired
+};
