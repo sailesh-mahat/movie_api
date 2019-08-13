@@ -1,38 +1,41 @@
 import React from 'react';
+import { MainView } from '../main-view/main-view';
+import Button from 'react-bootstrap/Button';
+import './movie-view.scss';	import './movie-view.scss';
 
 export class MovieView extends React.Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {};
   }
 
   render() {
-    const { movie, onClick } = this.props;
+  //  const { movie, onClick } = this.props;
 
-    if (!movie) return null;
+    if (!this.props.movie) return null;
 
     return (
       <div className="movie-view">
         <div className="movie-title">
-          <div className="label">Title</div>
-          <div className="value">{movie.Title}</div>
+          <h2 className="label">Title</h2>
+          <p className="value">{this.props.movie.Title}</p>
         </div>
         <div className="movie-description">
-          <div className="label">Description</div>
-          <div className="value">{movie.Description}</div>
+          <h3 className="label">Description</h3>
+          <p className="value">{this.props.movie.Description}</p>
         </div>
-        <img className="movie-poster" src={movie.ImagePath} />
+        <img className="movie-poster" src={this.props.movie.ImagePath} />
         <div className="movie-genre">
-          <div className="label">Genre</div>
-          <div className="value">{movie.Genre.Name}</div>
+          <h3 className="label">Genre</h3>
+          <p className="value">{this.props.movie.Genre.Name}</p>
         </div>
         <div className="movie-director">
-          <div className="label">Director</div>
-          <div className="value">{movie.Director.Name}</div>
+          <h3 className="label">Director</h3>
+          <p className="value">{this.props.movie.Director.Name}</p>
         </div>
-        <button onClick={() => onClick()}>BACK</button>
+        <Button variant='primary' onClick={() => this.props.returnCallback()}>Back</Button>
        </div>
     );
   }
