@@ -30146,7 +30146,7 @@ function LoginView(props) {
     variant: "primary",
     type: "submit",
     onClick: handleLogin
-  }, "Login"), _react.default.createElement(_Form.default.Group, {
+  }, "Login12"), _react.default.createElement(_Form.default.Group, {
     controlId: "formNewUser"
   }, _react.default.createElement(_Form.default.Text, null, "Or click ", _react.default.createElement(_Button.default, {
     id: "toRegisterView",
@@ -30579,7 +30579,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49850" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52591" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

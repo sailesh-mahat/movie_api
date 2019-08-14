@@ -36,7 +36,7 @@ export class MovieView extends React.Component {
           <h3 className="label">Director</h3>
           <p className="value">{this.props.movie.Director.Name}</p>
         </div>
-        <Button variant='primary' onClick={() => this.props.returnCallback()}>Back</Button>
+        <Button variant='primary' onClick={() => this.props.returnCallback()}>Go Back</Button>
        </div>
     );
   }
