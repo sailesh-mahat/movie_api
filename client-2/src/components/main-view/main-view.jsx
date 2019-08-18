@@ -25,6 +25,20 @@ constructor() {
   };
 }
 
+getMovies(token) {
+      axios.get('https://myflixapp.herokuapp.com/movies', {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      .then(response => {
+    // Assign the result to the state
+      this.setState({
+        movies: response.data
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    }
 
   componentDidMount() {
 
@@ -38,20 +52,7 @@ constructor() {
     }
 
 
-  getMovies(token) {
-        axios.get('https://myflixapp.herokuapp.com/movies', {
-          headers: { Authorization: `Bearer ${token}` }
-        })
-        .then(response => {
-      // Assign the result to the state
-        this.setState({
-          movies: response.data
-          });
-        })
-        .catch(err => {
-          console.log(err);
-        });
-      }
+
 
   onLoggedIn = (authData) => {
 
@@ -72,7 +73,6 @@ constructor() {
     if (!movies) return <div className="main-view"/>;
 
 
-    const selectedMovie = selectedMovieId ? movies.find(movie => movie._id === selectedMovieId) : null;
 
     return (
 
