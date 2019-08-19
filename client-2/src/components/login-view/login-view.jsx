@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';//useState hook for less redundancy
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
@@ -12,7 +13,7 @@ export function LoginView(props) {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    axios.post('https://myflixapp.herokuapp.com/login/', {
+    axios.post('https://myflixapp.herokuapp.com/login', {
       Username: username,
       Password: password
     })
