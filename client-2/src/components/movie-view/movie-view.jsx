@@ -1,57 +1,94 @@
 import React from 'react';
+import axios from 'axios';
 import PropTypes from 'prop-types';
-
-import { MainView } from '../main-view/main-view';
 import Button from 'react-bootstrap/Button';
+
+import { Link } from 'react-router-dom';
+
 import './movie-view.scss';
 
 export class MovieView extends React.Component {
-
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
 
     this.state = {};
   }
 
-  render() {
+  //add movie to FavoriteList
+  handleSubmit(event) {
+    event.preventDefault();
+    axios.put(`https://cineteca.herokuapp.com/users/${localStorage.getItem('user')}/movies/${this.props.movie._id}`, {
+      Username: localStorage.getItem('user')
+    }, {
+      headers: { Authorization: `Bearer ${localStorage.getItem('token')}`}
+    })
+    .then(response => {
+      console.log(response);
+      alert('Movie has been added to your Favorite List!');
+    })
+    .catch(event => {
+      console.log('error adding movie to list');
+      alert('Ooooops... Something went wrong!');
+    });
+  };
 
-    if (!this.props.movie) return null;
+  render() {
+    const {movie} = this.props;
+
+    if (!movie) return null;
 
     return (
-      <div className='movie-view'>
-        <div className='movie-title'>
-          <h2 className='label'>Title</h2>
-          <p className='value'>{this.props.movie.Title}</p>
+      <div className="movie-view">
+        <div className="movie-title">
+          <div className="label">Title</div>
+          <h1>{movie.Title}</h1>
         </div>
-        <div className='movie-description'>
-          <h3 className='label'>Description</h3>
-          <p className='value'>{this.props.movie.Description}</p>
+        <img className="movie-poster" src={movie.ImagePath} alt="movie cover" />
+        <div className="movie-description">
+          <div className="label">Description</div>
+          <div className="value">{movie.Description}</div>
         </div>
-        <div className='movie-genre'>
-          <h3 className='label'>Genre</h3>
-          <p className='value'>{this.props.movie.Genre.Name}</p>
+        <div className="movie-genre">
+          <div className="label">Genre</div>
+          <div className="value">{movie.Genre.Name}</div>
         </div>
-        <div className='movie-director'>
-          <h3 className='label'>Director</h3>
-          <p className='value'>{this.props.movie.Director.Name}</p>
+        <div className="movie-director">
+          <div className="label">Director</div>
+          <div className="value">{movie.Director.Name}</div>
         </div>
-        <div className='return-button'>
-          <Button variant='primary' onClick={() => this.props.returnCallback()}>Return</Button>
-        </div>
+        <Link to={'/'}>
+          <Button className="view-btn" variant="primary" type="button">
+          BACK
+          </Button>
+        </Link>
+        <Link to={`/genres/${movie.Genre.Name}`}>
+          <Button className="view-btn" variant="primary" type="button">
+          GENRE
+          </Button>
+        </Link>
+        <Link to={`/directors/${movie.Director.Name}`}>
+          <Button className="view-btn" variant="primary" type="button">
+          DIRECTOR
+          </Button>
+        </Link>
+        <Button className="view-btn" variant="primary" type="button" onClick={event => this.handleSubmit(event)}>
+        LIKE
+        </Button>
       </div>
-    );// return
-  } // render
+    );
+  }
 }
+
 MovieView.propTypes = {
   movie: PropTypes.shape({
     Title: PropTypes.string,
     Description: PropTypes.string,
+    ImagePath: PropTypes.string,
     Genre: PropTypes.shape({
       Name: PropTypes.string
     }),
     Director: PropTypes.shape({
       Name: PropTypes.string
     })
-  }).isRequired,
-  onClick: PropTypes.func.isRequired
-}
+  }).isRequired
+};

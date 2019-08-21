@@ -1,18 +1,19 @@
-import React, { useState } from 'react';//useState hook for less redundancy
-import PropTypes from 'prop-types';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
-import './login-view.scss';
+import React, { useState } from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import './login-view.scss';
 
 export function LoginView(props) {
-  const [username, setUsername] = useState('');
+  const [username, setUsername ] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    axios.post('https://myflixapp.herokuapp.com/login/', {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    axios.post('https://myflixapp.herokuapp.com/login', {
       Username: username,
       Password: password
     })
@@ -20,37 +21,41 @@ export function LoginView(props) {
       const data = response.data;
       props.onLoggedIn(data);
     })
-    .catch(err => {
-      console.error(err, 'No such user.')
+    .catch(event => {
+      alert('no such user: ' + username);
     });
   };
 
-
   return (
-    <Container className='login-view'>
-      <h1>Login</h1>
-      <Form>
-        <Form.Group controlId='formUsername'>
-          <Form.Label>Username:</Form.Label>
-          <Form.Control size='sm' type='text' placeholder='Username' value={username} onChange={e => setUsername(e.target.value)} />
-        </Form.Group>
-        <Form.Group controlId='formPassword'>
-          <Form.Label>Password:</Form.Label>
-          <Form.Control size='sm' type='password' placeholder='Password' value={password} onChange={e => setPassword(e.target.value)} />
-        </Form.Group>
-        <Button variant='primary' onClick={handleSubmit} >Submit</Button>
-        <Form.Group controlId='formNewUser'>
-          <Form.Text>New user? Click <Button id='login-view__register' style={{ padding: 0 }} variant='link' onClick={() => props.newUser()}> here </Button> to register</Form.Text>
-        </Form.Group>
-      </Form>
-    </Container>
-  );//return
+    <Form className="login-view">
+      <h2>Login</h2>
+      <Form.Group controlId="formBasicEmail">
+        <Form.Label >Username</Form.Label>
+        <Form.Control type="text" value={username} onChange={e => setUsername(e.target.value)} placeholder="Enter Username" />
+        <Form.Text className="text-muted">
+        Type your username here.
+        </Form.Text>
+      </Form.Group>
+
+      <Form.Group controlId="formBasicPassword">
+        <Form.Label>Password</Form.Label>
+        <Form.Control type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Password" />
+      </Form.Group>
+
+      <Button variant="primary" type="button" onClick={handleSubmit}>
+      LOGIN
+      </Button>
+      <p>New user?</p>
+      <p>
+        Register
+        <Link to={'/register'}>
+          <span> here</span>
+        </Link>
+      </p>
+    </Form>
+  );
 }
 
 LoginView.propTypes = {
-  username: PropTypes.string.isRequired,
-  password: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
-  newUser: PropTypes.func.isRequired,
   onLoggedIn: PropTypes.func.isRequired
-}
+};
