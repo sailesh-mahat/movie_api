@@ -1,8 +1,4 @@
-<<<<<<< Updated upstream
 import React, { useState } from 'react';//useState hook for less redundancy
-=======
-import React, { useState } from 'react';
->>>>>>> Stashed changes
 import PropTypes from 'prop-types';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
