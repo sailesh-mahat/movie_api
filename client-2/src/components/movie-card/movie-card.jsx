@@ -2,25 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-
-import { Link } from 'react-router-dom';
-
 import './movie-card.scss';
 
 export class MovieCard extends React.Component {
   render() {
-    //removed onClick
-    const { movie } = this.props;
+    //this is given to the <MovieCard/> component by the outer world
+    //which, in this case, is 'MainView', as 'MainView' is what's
+    //connected to your database via the movies endpoint of the API
+    const { movie, onClick } = this.props;
 
     return (
-      <Card style={{ width: '100%'}} >
-        <Card.Img variant="top" src={movie.ImagePath} />
+      <Card onClick={() => onClick(movie)} variant='link'style={{ width: '16rem' }}>
         <Card.Body>
+          <Card.Img variant="top" src={movie.Imagepath} />
           <Card.Title>{movie.Title}</Card.Title>
           <Card.Text>{movie.Description}</Card.Text>
-          <Link to={`/movies/${movie._id}`}>
-            <Button variant="primary">More</Button>
-          </Link>
+          <Button onClick={() => onClick(movie)} variant="link">Open</Button>
         </Card.Body>
       </Card>
     );
@@ -28,9 +25,10 @@ export class MovieCard extends React.Component {
 }
 
 MovieCard.propTypes = {
-  movie: PropTypes.shape({
-    Title: PropTypes.string,
-    Description: PropTypes.string,
-    ImagePath: PropTypes.string
-  }).isRequired
+    movie: PropTypes.shape({
+        Title: PropTypes.string,
+        ImagePath: PropTypes.string,
+        Description: PropTypes.string
+    }).isRequired,
+    onClick: PropTypes.func.isRequired
 };
