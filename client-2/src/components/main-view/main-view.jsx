@@ -4,6 +4,8 @@ import axios from 'axios';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
+import Button from 'react-bootstrap/Button';
+
 
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
@@ -18,7 +20,7 @@ constructor(props) {
 
   this.state = {
     movies: null,
-    selectedMovie: null,
+    selectedMovieId: null,
     user: null,
     newUser: null
   };
@@ -41,18 +43,24 @@ getMovies(token) {
 
   //one of the hooks available in a React component
   componentDidMount() {
-    let accessToken = localStorage.getItem('token');
-    if (accessToken !== null) {
-      this.setState({
-        user: localStorage.getItem('user')
-      });
-      this.getMovies(accessToken);
-    }
+    /* set `user` state and call `getMovies` if localStorage contains `token` item */
+    window.addEventListener('hashchange', this.handleNewHash, false);
+
+    this.handleNewHash();
   }
-  
-  onMovieClick(movie) {
+
+  handleNewHash = () => {
+    const movieId = window.location.hash.replace(/^#\/?|\/$/g, '').split('/');
+
     this.setState({
-      selectedMovie: movie
+      selectedMovieId: movieId[0]
+    });
+  }
+
+  onMovieClick(movie) {
+    window.location.hash = '#' + movie._id;
+    this.setState({
+      selectedMovieId: movie
     });
   }
 
@@ -70,7 +78,7 @@ getMovies(token) {
 
     localStorage.setItem('token', authData.token);
     localStorage.setItem('user', authData.user.Username);
-    this.getMovies();
+    this.getMovies(authData.token);
   }
 
    registerUser() {
@@ -88,7 +96,7 @@ getMovies(token) {
   render() {
     //if the state isn't initialized, this will throw on runtime
     //before the data is initially loaded
-    const { movies, selectedMovie, user, newUser } = this.state;
+    const { movies, selectedMovieId, user, newUser } = this.state;
 
     if (!user) {
       if (newUser) return <RegistrationView UserRegistered={() =>
@@ -100,6 +108,7 @@ getMovies(token) {
 
     //Before the movies have been loaded
     if (!movies) return <div className="main-view"/>;
+    const selectedMovie = selectedMovieId ? movies.find(m => m._id === selectedMovieId) : null;
 
     return (
 
@@ -117,6 +126,7 @@ getMovies(token) {
               })
             }
           </Row>
+        <Button variant="primary" type="submit"></Button>
       </Container>
     );
   }
