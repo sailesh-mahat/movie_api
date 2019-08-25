@@ -24,20 +24,32 @@ constructor(props) {
   };
 }
 
+getMovies(token) {
+  axios.get('https://myflixapp.herokuapp.com/movies', {
+    headers: { Authorization: `Bearer ${token}`}
+  })
+  .then(response => {
+    // Assign the result to the state
+    this.setState({
+      movies: response.data
+    });
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+}
+
   //one of the hooks available in a React component
   componentDidMount() {
-    axios.get('https://myflixapp.herokuapp.com/movies')
-    .then(response => {
-      //Assign the result to the state
+    let accessToken = localStorage.getItem('token');
+    if (accessToken !== null) {
       this.setState({
-        movies: response.data
+        user: localStorage.getItem('user')
       });
-    })
-    .catch(error => {
-      console.log(error);
-    });
+      this.getMovies(accessToken);
+    }
   }
-
+  
   onMovieClick(movie) {
     this.setState({
       selectedMovie: movie
@@ -50,11 +62,16 @@ constructor(props) {
     });
   }
 
-  onLoggedIn(user) {
-      this.setState({
-        user
-      });
-    }
+  onLoggedIn(authData) {
+    console.log(authData);
+    this.setState({
+      user: authData.user.Username
+    });
+
+    localStorage.setItem('token', authData.token);
+    localStorage.setItem('user', authData.user.Username);
+    this.getMovies();
+  }
 
    registerUser() {
     this.setState({

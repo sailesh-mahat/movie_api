@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import './login-view.scss';
+import axios from 'axios';
 
 export function LoginView(props) {
   const [ username, setUsername ] = useState('');
@@ -11,11 +12,19 @@ export function LoginView(props) {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    console.log(username, password);
-    props.onLoggedIn(username);
-    //send a request to the server for authentication
-    //then call props.onLoggedIn(username)
-  };
+  /* Send a request to the server for authentication */
+  axios.post('https://myflixapp.herokuapp.com/login', {
+    Username: username,
+    Password: password
+  })
+  .then(response => {
+    const data = response.data;
+    props.onLoggedIn(data);
+  })
+  .catch(e => {
+    console.log('no such user')
+  });
+};
 
   return (
     <Container className='login-view'>
