@@ -2,42 +2,48 @@ import React from 'react';
 import { MainView } from '../main-view/main-view';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
+import { Link } from 'react-router-dom';
+
 import './movie-view.scss';	import './movie-view.scss';
 
 export class MovieView extends React.Component {
 
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
 
     this.state = {};
   }
 
   render() {
-  //  const { movie, onClick } = this.props;
+    const { movie } = this.props;
 
-    if (!this.props.movie) return null;
+    if (!movie) return null;
 
     return (
       <div className="movie-view">
         <div className="movie-title">
           <h2 className="label">Title</h2>
-          <p className="value">{this.props.movie.Title}</p>
+          <p className="value">{movie.Title}</p>
         </div>
         <div className="movie-description">
           <h3 className="label">Description</h3>
-          <p className="value">{this.props.movie.Description}</p>
+          <p className="value">{movie.Description}</p>
         </div>
-        <img className="movie-poster" src={this.props.movie.ImagePath} />
+        <img className="movie-poster" src={movie.ImagePath} />
         <div className="movie-genre">
           <h3 className="label">Genre</h3>
-          <p className="value">{this.props.movie.Genre.Name}</p>
+          <p className="value">{movie.Genre.Name}</p>
         </div>
         <div className="movie-director">
           <h3 className="label">Director</h3>
-          <p className="value">{this.props.movie.Director.Name}</p>
+          <p className="value">{movie.Director.Name}</p>
         </div>
-        <Button variant='primary' onClick={() => this.props.returnCallback()}>Back</Button>
-       </div>
+          <Link to={'/'}>
+            <Button variant="primary" type="button">
+                    Go Back
+            </Button>
+          </Link>
+        </div>
     );
   }
 }
@@ -46,6 +52,7 @@ MovieView.propTypes = {
     movie: PropTypes.shape({
         Title: PropTypes.string,
         Description: PropTypes.string,
+        ImagePath: PropTypes.string,
         Genre: PropTypes.shape({
             Name: PropTypes.string
         }),
@@ -53,5 +60,4 @@ MovieView.propTypes = {
             Name: PropTypes.string
         })
     }).isRequired,
-    onClick: PropTypes.func.isRequired
 };

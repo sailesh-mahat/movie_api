@@ -1,8 +1,8 @@
 import React, { useState } from 'react';//useState hook used for lesser redundancy
-import PropTypes from 'prop-types';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
+import { Link } from 'react-router-dom';
 import './registration-view.scss';
 
 export function RegistrationView(props) {
@@ -12,10 +12,22 @@ export function RegistrationView(props) {
     const [birthday, setBirthday] = useState('');
 
     const SuccessfulRegistration = (e) => {
-        e.preventDefault();
-        props.UserRegistered();
-        props.onLoggedIn(username);
-    };
+      e.preventDefault();
+      axios.post('https://myflixapp.herokuapp.com/users', {
+       Username: username,
+       Password: password,
+       Email: email,
+       Birthday: birthday
+     })
+     .then(response => {
+       const data = response.data;
+       console.log(data);
+       window.open('/', '_self');
+     })
+     .catch(event => {
+       console.log('error registering the user')
+     });
+   };
 
     return (
       <Container className='registration-view'>
@@ -38,20 +50,13 @@ export function RegistrationView(props) {
                     <Form.Control size='sm' type='date' placeholder='MM/DD/YYYY' value={birthday} onChange={e => setBirthday(e.target.value)} />
                 </Form.Group>
                 <Button variant='primary' onClick={SuccessfulRegistration}>Register</Button>
-                <Form.Group controlId='formNewUser'>
-                    <Form.Text>Already registered? Click <Button style={{ padding: 0 }} variant='link' onClick={() => props.UserRegistered()}> here </Button> to login</Form.Text>
-                </Form.Group>
+                <p>
+                  Already a member?
+                  <Link to={'/'}>
+                    <span>Login</span>
+                  </Link>
+                </p>
             </Form>
         </Container>
     );
 }
-
-RegistrationView.propTypes = {
-    username: PropTypes.string.isRequired,
-    password: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-    birthday: PropTypes.string.isRequired,
-    onClick: PropTypes.func.isRequired,
-    UserRegistered: PropTypes.func.isRequired,
-    onLoggedIn: PropTypes.func.isRequired
-}; 
