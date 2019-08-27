@@ -29,8 +29,8 @@ export class DirectorView extends React.Component {
         <h2>Died</h2>
         <div className="death">{director.Death}</div>
         <Link to={'/'}>
-          <Button variant="primary" type="button">
-          BACK
+          <Button variant="dark" type="button">
+          Go Back
           </Button>
         </Link>
       </div>

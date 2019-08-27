@@ -51,7 +51,7 @@ export function RegistrationView(props) {
                     <Form.Label>Birthday</Form.Label>
                     <Form.Control size='sm' type='date' placeholder='MM/DD/YYYY' value={birthday} onChange={e => setBirthday(e.target.value)} />
                 </Form.Group>
-                <Button variant='primary' onClick={SuccessfulRegistration}>Register</Button>
+                <Button variant='dark' onClick={SuccessfulRegistration}>Register</Button>
                 <p>
                   Already a member?
                   <Link to={'/'}>

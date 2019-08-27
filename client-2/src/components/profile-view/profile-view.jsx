@@ -173,7 +173,7 @@ export class ProfileView extends React.Component {
 
           <Form.Group controlId="formBasicBirthday">
             <Form.Label>Your Birthday</Form.Label>
-            <Form.Control type="text" placeholder="01.01.2000" />
+            <Form.Control type="date" placeholder="01.01.2000" />
           </Form.Group>
 
           <Button variant="dark" type="button" onClick={event => this.handleSubmit(event)} >

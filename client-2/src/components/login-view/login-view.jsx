@@ -31,29 +31,30 @@ export function LoginView(props) {
 };
 
   return (
-    <Container className='login-view'>
-      <h1>Welcome to MyFlix! </h1>
-      <Form>
-      <Form.Group controlId="formBasicEmail">
-        <Form.Label >Username</Form.Label>
-        <Form.Control type="text" value={username} onChange={e => setUsername(e.target.value)} placeholder="Enter Username" />
+    <Router>
+      <Container className='login-view'>
+        <h1>Welcome to MyFlix! </h1>
+        <Form>
+        <Form.Group controlId="formBasicEmail">
+          <Form.Label >Username</Form.Label>
+          <Form.Control type="text" value={username} onChange={e => setUsername(e.target.value)} placeholder="Enter Username" />
 
-      </Form.Group>
-      <Form.Group controlId="formBasicPassword">
-        <Form.Label>Password</Form.Label>
-        <Form.Control type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Enter Password" />
-      </Form.Group>
-      <Button variant="primary" type="button" className="btn btn-dark" onClick={handleLogin}>
-      LOGIN
-      </Button>
-      <p>Not a member, Signup
-        <Router>
-        <Link to={'/register'}>
-          <span> here</span>
-        </Link>
-        </Router></p>
-    </Form>
-    </Container>
+        </Form.Group>
+        <Form.Group controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Enter Password" />
+        </Form.Group>
+        <Button variant="primary" type="button" className="btn btn-dark" onClick={handleLogin}>
+        LOGIN
+        </Button>
+        <p>Not a member, Signup
+          <Link to={'/register'}>
+            <span> here</span>
+          </Link>
+        </p>
+        </Form>
+        </Container>
+      </Router>
   );
 }
 
