@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
@@ -15,6 +15,8 @@ import { LoginView } from '../login-view/login-view';
 import { RegistrationView } from '../registration-view/registration-view';
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
+import { ProfileView } from '../profile-view/profile-view';
+
 import './main-view.scss';
 
 export class MainView extends React.Component {
@@ -24,7 +26,8 @@ constructor() {
 
   this.state = {
     movies: [],
-    user: null
+    user: null,
+    profileData: null
   };
 }
 
@@ -36,6 +39,7 @@ componentDidMount() {
     });
     this.getMovies(accessToken);
   }
+}
 
 getMovies(token) {
   axios.get('https://myflixapp.herokuapp.com/movies', {
@@ -53,9 +57,10 @@ getMovies(token) {
 
 
   onLoggedIn(authData) {
-    console.log(authData);
+    console.log(authData.user);
     this.setState({
-      user: authData.user.Username
+      user: authData.user.Username,
+      profileData: authData.user
     });
 
     localStorage.setItem('token', authData.token);
@@ -85,16 +90,18 @@ getMovies(token) {
 
 
   render() {
-    const { movies, user } = this.state;
+    const { movies, user, profileData } = this.state;
 
     if (!movies) return <div className="main-view"/>;
 
 
     return (
       <Router>
-        <div className="logout">
-          <button onClick={() => this.logOut()}>LogOut</button>
-        </div>
+
+        <Button type="button" class="btn btn-secondary" onClick={() => this.logOut()}>Log out</Button>
+        <Link to={'/profile'}>
+              <Button>MyProfile</Button>
+        </Link>
         <Container className='main-view' fluid='true'>
           <Row>
           <Route exact path="/" render={ () => {
@@ -120,6 +127,8 @@ getMovies(token) {
           if (!movies || !movies.length) return <div className="main-view"/>;
           return <DirectorView director={movies.find(movie => movie.Director.Name === match.params.name).Director}/>}
         }/>
+        <Route exact path="/profile" render={() => <ProfileView user={profileData} />}/>
+
           </Row>
         </Container>
       </Router>
