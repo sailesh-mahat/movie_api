@@ -1,4 +1,6 @@
 import React from 'react';
+import axios from 'axios';
+
 import { MainView } from '../main-view/main-view';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
@@ -13,6 +15,26 @@ export class MovieView extends React.Component {
 
     this.state = {};
   }
+
+  //add movie to FavoriteList
+  handleSubmit(event) {
+    event.preventDefault();
+    console.log(this.props.user.Username);
+    axios.put(`https://myflixapp.herokuapp.com/users/${this.props.user.Username}/movies/${this.props.movie._id}`, {
+      Username: this.props.user.Username
+    }, {
+      headers: { Authorization: `Bearer ${localStorage.getItem('token')}`}
+    })
+    .then(response => {
+      console.log(response);
+      alert('Movie has been added to your Favorite List!');
+    })
+    .catch(event => {
+      console.log('Error adding movie to list');
+      alert('Something went wrong!');
+    });
+  };
+
 
   render() {
     const { movie } = this.props;
@@ -39,20 +61,23 @@ export class MovieView extends React.Component {
           <p className="value">{movie.Director.Name}</p>
         </div>
           <Link to={'/'}>
-            <Button variant="primary" type="button">
+            <Button variant="dark" type="button">
                     Go Back
             </Button>
           </Link>
           <Link to={`/genres/${movie.Genre.Name}`}>
-            <Button variant="primary" type="button">
-            GENRE
+            <Button variant="dark" type="button">
+            Genre
             </Button>
           </Link>
           <Link to={`/directors/${movie.Director.Name}`}>
-            <Button variant="primary" type="button">
-            DIRECTOR
+            <Button variant="dark" type="button">
+            Director
             </Button>
           </Link>
+          <Button className="view-btn" variant="dark" type="button" onClick={event => this.handleSubmit(event)}>
+            Add to favorites
+          </Button>
         </div>
     );
   }

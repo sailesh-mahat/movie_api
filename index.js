@@ -235,6 +235,38 @@ app.delete('/users/:Username', passport.authenticate('jwt', { session: false }),
   });
 });
 
+
+// add a movie to users favoriteMovies list
+app.put('/users/:username/movies/:movieid', passport.authenticate('jwt', { session: false }), (req, res) => {
+  Users.findOneAndUpdate({ Username : req.params.username}, { $push : {
+    FavoriteMovies : req.params.movieid
+  }},
+  { new : true},
+  (error, updatedUser) => {
+    if (error) {
+      console.error(error);
+      res.status(500).send('Error: ' + error);
+    } else {
+      res.json(updatedUser)
+    }
+  })
+});
+
+// delete a movie from users favoriteMovies list
+app.delete('/users/:username/movies/:movieid', passport.authenticate('jwt', { session: false }), (req, res) => {
+  Users.findOneAndUpdate({ Username : req.params.username}, { $pull : {
+    FavoriteMovies : req.params.movieid
+  }},
+  (error, updatedUser) => {
+    if (error) {
+      console.error(error);
+      res.status(500).send('Error: ' + error);
+    } else {
+      res.json(updatedUser)
+    }
+  })
+});
+
 //error-handling mechanism
 app.use(function (err, req, res, next) {
   console.error(err.stack);

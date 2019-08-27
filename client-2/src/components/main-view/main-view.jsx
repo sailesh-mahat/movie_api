@@ -98,9 +98,9 @@ getMovies(token) {
     return (
       <Router>
 
-        <Button type="button" class="btn btn-secondary" onClick={() => this.logOut()}>Log out</Button>
+        <Button type="button" className="btn btn-light btn-sm" onClick={() => this.logOut()}>Log out</Button>
         <Link to={'/profile'}>
-              <Button>MyProfile</Button>
+              <Button type="button" className="btn btn-light btn-sm">My Profile</Button>
         </Link>
         <Container className='main-view' fluid='true'>
           <Row>
@@ -113,10 +113,9 @@ getMovies(token) {
          ))}
        }/>
        <Route exact path="/movies/:movieId" render={ ({match}) =>
-        <MovieView movie={movies.find(movie => movie._id === match.params.movieId)}/> } />
+        <MovieView user={profileData} movie={movies.find(movie => movie._id === match.params.movieId)}/> } />
 
-       <Route exact path="/register" render={() =>
-         <RegistrationView UserRegistered={user => this.UserRegistered(user)} />} />
+
 
        <Route exact path="/genres/:name" render={ ({match}) => {
           if (!movies || !movies.length) return <div className="main-view"/>;
@@ -127,7 +126,11 @@ getMovies(token) {
           if (!movies || !movies.length) return <div className="main-view"/>;
           return <DirectorView director={movies.find(movie => movie.Director.Name === match.params.name).Director}/>}
         }/>
-        <Route exact path="/profile" render={() => <ProfileView user={profileData} />}/>
+
+        <Route exact path="/register" render={() =>
+          <RegistrationView UserRegistered={user => this.UserRegistered(user)} />} />
+
+        <Route exact path="/profile" render={() => <ProfileView movies={movies} user={profileData} />}/>
 
           </Row>
         </Container>
