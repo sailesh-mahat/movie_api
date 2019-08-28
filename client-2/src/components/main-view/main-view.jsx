@@ -8,11 +8,10 @@ import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 
-
-import { MovieCard } from '../movie-card/movie-card';
-import { MovieView } from '../movie-view/movie-view';
 import { LoginView } from '../login-view/login-view';
 import { RegistrationView } from '../registration-view/registration-view';
+import { MovieCard } from '../movie-card/movie-card';
+import { MovieView } from '../movie-view/movie-view';
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
 import { ProfileView } from '../profile-view/profile-view';
@@ -84,7 +83,10 @@ getMovies(token) {
       //resets user state to render again
       this.setState({
         user: null
-      })
+      });
+
+      //make sure login screen appears after logging out
+      window.open('/', '_self');
     }
 
 
@@ -97,12 +99,11 @@ getMovies(token) {
 
     return (
       <Router>
-
+        <Container className='main-view' fluid='true'>
         <Button type="button" className="btn btn-light btn-sm" onClick={() => this.logOut()}>Log out</Button>
         <Link to={'/profile'}>
               <Button type="button" className="btn btn-light btn-sm">My Profile</Button>
         </Link>
-        <Container className='main-view' fluid='true'>
           <Row>
           <Route exact path="/" render={ () => {
          if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;

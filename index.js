@@ -154,7 +154,7 @@ app.post('/users', function(req, res) {
 });
 
 //Updates a user info
-app.put('/users/:username', passport.authenticate('jwt', { session: false }), function (req, res) {
+app.put('/users/:Username', passport.authenticate('jwt', { session: false }), function (req, res) {
   // Validation logic here for request
   req.checkBody('Username', 'Username is required').notEmpty();
   req.checkBody('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric();
@@ -188,7 +188,7 @@ app.put('/users/:username', passport.authenticate('jwt', { session: false }), fu
 });
 
 // add a movie to users favoriteMovies list
-app.put('/users/:username/movies/:movieid', passport.authenticate('jwt', { session: false }), (req, res) => {
+app.put('/users/:Username/movies/:movieid', passport.authenticate('jwt', { session: false }), (req, res) => {
   Users.findOneAndUpdate({ Username : req.params.username}, { $push : {
     FavoriteMovies : req.params.movieid
   }},
@@ -204,7 +204,7 @@ app.put('/users/:username/movies/:movieid', passport.authenticate('jwt', { sessi
 });
 
 // delete a movie from users favoriteMovies list
-app.delete('/users/:username/movies/:movieid', passport.authenticate('jwt', { session: false }), (req, res) => {
+app.delete('/users/:Username/movies/:movieid', passport.authenticate('jwt', { session: false }), (req, res) => {
   Users.findOneAndUpdate({ Username : req.params.username}, { $pull : {
     FavoriteMovies : req.params.movieid
   }},

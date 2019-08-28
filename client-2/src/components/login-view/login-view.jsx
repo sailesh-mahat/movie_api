@@ -6,7 +6,7 @@ import Container from 'react-bootstrap/Container';
 
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { BrowserRouter as Router, Route} from "react-router-dom";
+
 
 import './login-view.scss';
 
@@ -31,14 +31,12 @@ export function LoginView(props) {
 };
 
   return (
-    <Router>
       <Container className='login-view'>
         <h1>Welcome to MyFlix! </h1>
         <Form>
         <Form.Group controlId="formBasicEmail">
           <Form.Label >Username</Form.Label>
           <Form.Control type="text" value={username} onChange={e => setUsername(e.target.value)} placeholder="Enter Username" />
-
         </Form.Group>
         <Form.Group controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
@@ -53,8 +51,7 @@ export function LoginView(props) {
           </Link>
         </p>
         </Form>
-        </Container>
-      </Router>
+      </Container>
   );
 }
 

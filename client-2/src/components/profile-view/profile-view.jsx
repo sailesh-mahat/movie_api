@@ -120,8 +120,8 @@ export class ProfileView extends React.Component {
           <div className="value">{user.Birthday}</div>
         </div>
         <div className="email">
-          <div className="label">EMail:</div>
-          <div className="value">{user.EMail}</div>
+          <div className="label">Email:</div>
+          <div className="value">{user.Email}</div>
         </div>
         <div className="favoriteMovies">
           <div className="label">Favorite Movies:</div>
@@ -135,7 +135,7 @@ export class ProfileView extends React.Component {
               <div className="value">{user.FavoriteMovies.map(favoriteMovie =>
                 (<p key={favoriteMovie}>{movies.find(movie =>
                   movie._id === favoriteMovie).Title}<span onClick={(event) =>
-                    this.deleteMovie(event, favoriteMovie)}> Delete</span></p>))}}
+                    this.deleteMovie(event, favoriteMovie)}> Delete</span></p>))}
               </div>
             }
                 </div>

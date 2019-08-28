@@ -1,7 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-
-import { MainView } from '../main-view/main-view';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
