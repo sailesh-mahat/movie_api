@@ -65,7 +65,7 @@ export class ProfileView extends React.Component {
     //update user data
     handleSubmit(event) {
       event.preventDefault();
-      console.log(this.state.username);
+      console.log(this.state);
       axios.put(`https://myflixapp.herokuapp.com/users/${this.props.user.Username}`, {
         Username: this.state.username,
         Password: this.state.password,
@@ -163,17 +163,17 @@ export class ProfileView extends React.Component {
 
           <Form.Group controlId="formBasicPassword">
             <Form.Label>Your Password</Form.Label>
-            <Form.Control type="password" name="password" onChange={event => this.handleChange(event)} placeholder="Password" />
+            <Form.Control type="password" name="password" onChange={event => this.handleChange(event)} placeholder="Enter Password" />
           </Form.Group>
 
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Your Email</Form.Label>
-            <Form.Control type="email" name="birthday" onChange={event => this.handleChange(event)} placeholder="example@ema.il" />
+            <Form.Control type="email" name="email" onChange={event => this.handleChange(event)} placeholder="example@ema.il" />
           </Form.Group>
 
           <Form.Group controlId="formBasicBirthday">
             <Form.Label>Your Birthday</Form.Label>
-            <Form.Control type="date" placeholder="01.01.2000" />
+            <Form.Control type="date" placeholder="01.01.2000" name="birthday" onChange={event => this.handleChange(event)} />
           </Form.Group>
 
           <Button variant="dark" type="button" onClick={event => this.handleSubmit(event)} >
