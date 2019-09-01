@@ -189,7 +189,13 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }), fu
 
 // add a movie to users favoriteMovies list
 app.put('/users/:Username/movies/:movieid', passport.authenticate('jwt', { session: false }), (req, res) => {
-  Users.findOneAndUpdate({ Username : req.params.username}, { $push : {
+
+  console.log(req.params);
+
+
+  console.log(Users.findOne({ Username : req.params.Username}))
+
+  Users.findOneAndUpdate({ Username : req.params.Username}, { $push : {
     FavoriteMovies : req.params.movieid
   }},
   { new : true},
