@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
+
 
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
@@ -7,70 +9,65 @@ import { Link } from 'react-router-dom';
 
 import './movie-view.scss';	import './movie-view.scss';
 
-export class MovieView extends React.Component {
+function MovieView(props) {
+  const { movies, movieId } = props;
 
-  constructor() {
-    super();
+    if (!movies || movies.length) return null;
 
-    this.state = {};
-  }
+    const movie = movies.find(movie => movie._id == movieId);
 
-  //add movie to FavoriteList
-  handleSubmit(event) {
+    function handleSubmit(event) {
+
     event.preventDefault();
-    console.log(this.props.user.Username);
-    axios.put(`https://myflixapp.herokuapp.com/users/${this.props.user.Username}/movies/${this.props.movie._id}`, {
-      Username: this.props.user.Username
-    }, {
-      headers: { Authorization: `Bearer ${localStorage.getItem('token')}`}
-    })
-    .then(response => {
-      console.log(response);
-      alert('Movie has been added to your Favorite List!');
-    })
-    .catch(event => {
-      console.log('Error adding movie to list');
-      alert('Something went wrong!');
-    });
-  };
+      console.log(this.props.user.Username);
+      axios.put(`https://myflixapp.herokuapp.com/users/${this.props.user.Username}/movies/${movie._id}`, {
+        Username: this.props.user.Username
+      }, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}`}
+      })
+      .then(response => {
+        console.log(response);
+        alert('Movie has been added to your Favorite List!');
+      })
+      .catch(event => {
+        console.log('Error adding movie to list');
+        alert('Something went wrong!');
+      });
+    };
 
 
-  render() {
-    const { movie } = this.props;
-
-    if (!movie) return null;
 
     return (
       <div className="movie-view">
         <div className="movie-title">
-          <h2 className="label">Title</h2>
-          <p className="value">{movie.Title}</p>
+          <div className="label">Title</div>
+          <h1>{movie.Title}</h1>
         </div>
+        <img className="movie-poster" src={movie.ImagePath} alt="movie cover" />
         <div className="movie-description">
-          <h3 className="label">Description</h3>
-          <p className="value">{movie.Description}</p>
+          <div className="label">Description</div>
+          <div className="value">{movie.Description}</div>
         </div>
-        <img className="movie-poster" src={movie.ImagePath} />
         <div className="movie-genre">
-          <h3 className="label">Genre</h3>
-          <p className="value">{movie.Genre.Name}</p>
+          <div className="label">Genre</div>
+          <div className="value">{movie.Genre.Name}</div>
         </div>
         <div className="movie-director">
-          <h3 className="label">Director</h3>
-          <p className="value">{movie.Director.Name}</p>
+          <div className="label">Director</div>
+          <div className="value">{movie.Director.Name}</div>
         </div>
           <Link to={'/'}>
-            <Button variant="dark" type="button">
+            <Button className="view-btn" variant="dark" type="button">
                     Go Back
             </Button>
           </Link>
           <Link to={`/genres/${movie.Genre.Name}`}>
-            <Button variant="dark" type="button">
+            <Button className="view-btn" variant="dark" type="button">
             Genre
             </Button>
           </Link>
           <Link to={`/directors/${movie.Director.Name}`}>
-            <Button variant="dark" type="button">
+            <Button className="view-btn" variant="dark" type="button">
             Director
             </Button>
           </Link>
@@ -81,17 +78,3 @@ export class MovieView extends React.Component {
     );
   }
 }
-
-MovieView.propTypes = {
-    movie: PropTypes.shape({
-        Title: PropTypes.string,
-        Description: PropTypes.string,
-        ImagePath: PropTypes.string,
-        Genre: PropTypes.shape({
-            Name: PropTypes.string
-        }),
-        Director: PropTypes.shape({
-            Name: PropTypes.string
-        })
-    }).isRequired,
-};
