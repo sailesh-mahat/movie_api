@@ -21,7 +21,7 @@ import './genre-view.scss';
         <h1 className="genre">{genre.Name}</h1>
         <div className="description">{genre.Description}</div>
         <Link to={'/'}>
-          <Button variant="primary" type="button">
+          <Button variant="dark" type="button">
           BACK
           </Button>
         </Link>

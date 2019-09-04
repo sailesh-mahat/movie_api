@@ -12,7 +12,7 @@ import './login-view.scss';
 
 export function LoginView(props) {
   const [ username, setUsername ] = useState('');
-  const [ password, setPassword ] = useState(''); 
+  const [ password, setPassword ] = useState('');
 
   const handleLogin = (e) => {
     e.preventDefault();

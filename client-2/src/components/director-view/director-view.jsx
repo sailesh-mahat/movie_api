@@ -23,10 +23,8 @@ function DirectorView(props) {
       <div className="birth">{director.Birth}</div>
       <h2>Died</h2>
       <div className="death">{director.Death}</div>
-      <h2>Movies</h2>
-      <div className="movies">{director.Movies.map((movie, i) => { return <p key={i}>{movie}</p>})}</div>
       <Link to={'/'}>
-        <Button variant="primary" type="button">
+        <Button variant="dark" type="button">
         BACK
         </Button>
       </Link>

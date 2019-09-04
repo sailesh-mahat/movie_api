@@ -10,8 +10,7 @@ import './visibility-filter-input.scss';
 
 
 function VisibilityFilterInput(props) {
-  return
-  <Form>
+  return<Form>
     <Form.Control
     className="visibilityFilterForm"
     onChange={event => props.setFilter(event.target.value)}
@@ -29,7 +28,6 @@ function VisibilityFilterInput(props) {
       <option>Director</option>
     </Form.Control>
   </Form>
-
 }
 
 export default connect(

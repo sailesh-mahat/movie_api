@@ -9,6 +9,8 @@ import Button from 'react-bootstrap/Button';
 
 import { setMovies, setLoggedInUser } from '../../actions/actions';
 import MoviesList from '../movies-list/movies-list';
+import Container from 'react-bootstrap/Container';
+
 
 import { LoginView } from '../login-view/login-view';
 import { RegistrationView } from '../registration-view/registration-view';
@@ -104,17 +106,18 @@ getMovies(token) {
 
   render() {
 
-    const { loggedInUser } = this.state;
+    const { user } = this.state;
 
     return (
       <Router>
+      <Container className="main-view">
         <Button type="button" className="btn btn-light btn-sm" onClick={() => this.logOut()}>Log out</Button>
         <Link to={'/profile'}>
               <Button type="button" className="btn btn-light btn-sm">My Profile</Button>
         </Link>
 
         <Route exact path="/" render={() => {
-            if (!loggedInuser) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+            if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
             return <MoviesList />;
             }}
           />
@@ -125,13 +128,14 @@ getMovies(token) {
 
         <Route exact path="/genres/:name" render={({ match }) => <GenreView genreName={match.params.name}/>}/>
 
+        <Route exact path="/directors/:name" render={({ match }) => <DirectorView directorName={match.params.name}/>}/>
+
 
         <Route exact path="/register" render={() =>
           <RegistrationView UserRegistered={user => this.UserRegistered(user)} />} />
 
-        <Route exact path="/profile" render={() => <ProfileView movies={movies} user={profileData} />}/>
-
-          </Row>
+          <Route exact path="/profile" render={() => <ProfileView />}/>
+          </Container>
       </Router>
     );
   }

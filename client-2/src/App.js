@@ -5,10 +5,6 @@ import { Provider } from 'react-redux';
 import moviesApp from './reducers/reducers';
 import MainView from './components/main-view/main-view';
 
-import moviesApp from '../reducers/reducers';
-
-import { MainView } from './components/main-view/main-view';
-
 import './App.css';
 
 const store = createStore(moviesApp);

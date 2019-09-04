@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 
+import Container from 'react-bootstrap/Container';
 
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
@@ -16,12 +17,10 @@ function MovieView(props) {
 
     const movie = movies.find(movie => movie._id == movieId);
 
-    function handleSubmit(event) {
-
+  function handleSubmit(event) {
     event.preventDefault();
-      console.log(this.props.user.Username);
-      axios.put(`https://myflixapp.herokuapp.com/users/${this.props.user.Username}/movies/${movie._id}`, {
-        Username: this.props.user.Username
+      axios.put(`https://myflixapp.herokuapp.com/users/${localStorage.getItem('user')}/movies/${movie._id}`, {
+        Username: localStorage.getItem('user')
       }, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}`}
       })
@@ -38,22 +37,22 @@ function MovieView(props) {
 
 
     return (
-      <div className="movie-view">
+      <Container className="movie-view">
+
         <div className="movie-title">
-          <div className="label">Title</div>
           <h1>{movie.Title}</h1>
         </div>
         <img className="movie-poster" src={movie.ImagePath} alt="movie cover" />
         <div className="movie-description">
-          <div className="label">Description</div>
+          <h4 className="label">Description</h4>
           <div className="value">{movie.Description}</div>
         </div>
         <div className="movie-genre">
-          <div className="label">Genre</div>
+          <h4 className="label">Genre</h4>
           <div className="value">{movie.Genre.Name}</div>
         </div>
         <div className="movie-director">
-          <div className="label">Director</div>
+          <h4 className="label">Director</h4>
           <div className="value">{movie.Director.Name}</div>
         </div>
           <Link to={'/'}>
@@ -74,7 +73,9 @@ function MovieView(props) {
           <Button className="view-btn" variant="dark" type="button" onClick={event => handleSubmit(event)}>
             Add to favorites
           </Button>
-        </div>
+
+        </Container>
     );
   }
-}
+
+export default connect(({movies}) => ({movies}))(MovieView);
