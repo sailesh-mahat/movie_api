@@ -36,6 +36,7 @@ componentDidMount() {
       user: localStorage.getItem('user')
     });
     this.getMovies(accessToken);
+    this.getUser(accessToken);
   }
 }
 
@@ -53,13 +54,25 @@ getMovies(token) {
   });
 }
 
+// get user
+  getUser(token) {
+    let username = localStorage.getItem('user');
+    axios.get(`https://myflixapp.herokuapp.com/users/${username}`, {
+      headers: { Authorization: `Bearer ${token}`}
+    })
+    .then(response => {
+      this.props.setLoggedInUser(response.data);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
 
   onLoggedIn(authData) {
     console.log(authData.user);
 
 
-    this.props.setLoggedInUser(authData.user.Username);
-    console.log(this.props.setLoggedInUser(authData.user.Username));
+    this.props.setLoggedInUser(authData.user);
     localStorage.setItem('token', authData.token);
     localStorage.setItem('user', authData.user.Username);
     this.getMovies(authData.token);
