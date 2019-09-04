@@ -13,8 +13,8 @@ import MoviesList from '../movies-list/movies-list';
 import { LoginView } from '../login-view/login-view';
 import { RegistrationView } from '../registration-view/registration-view';
 import  MovieView  from '../movie-view/movie-view';
-import { DirectorView } from '../director-view/director-view';
-import { GenreView } from '../genre-view/genre-view';
+import  DirectorView  from '../director-view/director-view';
+import  GenreView  from '../genre-view/genre-view';
 import { ProfileView } from '../profile-view/profile-view';
 
 import './main-view.scss';
@@ -25,7 +25,6 @@ constructor() {
   super();
 
   this.state = {
-    //movies: [],
     user: null
   };
 }
@@ -93,7 +92,7 @@ getMovies(token) {
 
   render() {
 
-    const { movies, user } = this.state;
+    const { user } = this.state;
 
     return (
       <Router>
@@ -112,15 +111,14 @@ getMovies(token) {
         <MovieView movieId={match.params.id}/>}/>
 
 
-       <Route exact path="/genres/:name" render={ ({match}) => {
-          if (!movies || !movies.length) return <div className="main-view"/>;
-          return <GenreView genre={movies.find(movie => movie.Genre.Name === match.params.name).Genre} />}
-        }/>
+        <Route exact path="/genres/:name" render={({ match }) => <GenreView genreName={match.params.name}/>}/>
 
-        <Route path="/directors/:name" render={({ match }) => {
+
+        /*<Route path="/directors/:name" render={({ match }) => {
           if (!movies || !movies.length) return <div className="main-view"/>;
           return <DirectorView director={movies.find(movie => movie.Director.Name === match.params.name).Director}/>}
         }/>
+        */
 
         <Route exact path="/register" render={() =>
           <RegistrationView UserRegistered={user => this.UserRegistered(user)} />} />
