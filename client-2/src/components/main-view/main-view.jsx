@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 import Button from 'react-bootstrap/Button';
 
-import { setMovies } from '../../actions/actions';
+import { setMovies, setLoggedInUser } from '../../actions/actions';
 import MoviesList from '../movies-list/movies-list';
 
 import { LoginView } from '../login-view/login-view';
@@ -56,13 +56,12 @@ getMovies(token) {
 
   onLoggedIn(authData) {
     console.log(authData.user);
-    this.setState({
-      user: authData.user,
-      profileData: authData.user
-    });
 
+
+    this.props.setLoggedInUser(authData.user.Username);
+    console.log(this.props.setLoggedInUser(authData.user.Username));
     localStorage.setItem('token', authData.token);
-    localStorage.setItem('user', authData.user);
+    localStorage.setItem('user', authData.user.Username);
     this.getMovies(authData.token);
   }
 
@@ -92,7 +91,7 @@ getMovies(token) {
 
   render() {
 
-    const { user } = this.state;
+    const { loggedInUser } = this.state;
 
     return (
       <Router>
@@ -102,7 +101,7 @@ getMovies(token) {
         </Link>
 
         <Route exact path="/" render={() => {
-            if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+            if (!loggedInuser) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
             return <MoviesList />;
             }}
           />
@@ -113,12 +112,6 @@ getMovies(token) {
 
         <Route exact path="/genres/:name" render={({ match }) => <GenreView genreName={match.params.name}/>}/>
 
-
-        /*<Route path="/directors/:name" render={({ match }) => {
-          if (!movies || !movies.length) return <div className="main-view"/>;
-          return <DirectorView director={movies.find(movie => movie.Director.Name === match.params.name).Director}/>}
-        }/>
-        */
 
         <Route exact path="/register" render={() =>
           <RegistrationView UserRegistered={user => this.UserRegistered(user)} />} />
@@ -131,4 +124,4 @@ getMovies(token) {
   }
 }
 
-export default connect(null, { setMovies } )(MainView);
+export default connect(null, { setMovies, setLoggedInUser } )(MainView);
