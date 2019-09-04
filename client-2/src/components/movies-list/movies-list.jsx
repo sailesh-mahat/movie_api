@@ -1,5 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
 
 import VisibilityFilterInput from '../visibility-filter-input/visibility-filter-input';
 
@@ -13,8 +17,16 @@ const mapStateToProps = state => {
     return 0
   });
 
-  if (visibilityFilter !== '') {
-    moviesToShow = moviesToShow.filter(movie => movie.title.includes(visibilityFilter));
+  if (visibilityFilter !== '' && sortColumn === 'Title') {
+    moviesToShow = moviesToShow.filter(movie => movie.Title.toLowerCase().includes(visibilityFilter.toLowerCase()));
+  }
+  
+  if (visibilityFilter !== '' && sortColumn === 'Genre') {
+    moviesToShow = moviesToShow.filter(movie => movie.Genre.Name.toLowerCase().includes(visibilityFilter.toLowerCase()));
+  }
+
+  if (visibilityFilter !== '' && sortColumn === 'Director') {
+    moviesToShow = moviesToShow.filter(movie => movie.Director.Name.toLowerCase().includes(visibilityFilter.toLowerCase()));
   }
 
   return { movies: moviesToShow };};
@@ -26,14 +38,17 @@ function MoviesList(props) {
   if (!movies) return <div className="main-view" />;
 
   return <div className="movie-list">
-      <VisibilityFilterInput />
+    <Container>
+      <Row>
       {movies.map(movie => (
-      <Col key={movie._id} xs={12} sm={6} md={4}>
-        <MovieCard key={movie._id} movie={movie} />
-      </Col>
-        ));
+        <Col key={movie._id} xs={12} sm={6} md={4}>
+          <MovieCard key={movie._id} movie={movie} />
+        </Col>
+      ))
       }
-  </div>
+      </Row>
+  </Container>
+      </div>
 }
 
 export default connect(mapStateToProps)(MoviesList);

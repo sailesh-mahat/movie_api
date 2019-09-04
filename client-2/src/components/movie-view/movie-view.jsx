@@ -12,7 +12,7 @@ import './movie-view.scss';	import './movie-view.scss';
 function MovieView(props) {
   const { movies, movieId } = props;
 
-    if (!movies || movies.length) return null;
+    if (!movies || !movies.length) return null;
 
     const movie = movies.find(movie => movie._id == movieId);
 
@@ -71,7 +71,7 @@ function MovieView(props) {
             Director
             </Button>
           </Link>
-          <Button className="view-btn" variant="dark" type="button" onClick={event => this.handleSubmit(event)}>
+          <Button className="view-btn" variant="dark" type="button" onClick={event => handleSubmit(event)}>
             Add to favorites
           </Button>
         </div>

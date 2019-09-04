@@ -12,7 +12,7 @@ import { SET_MOVIES, SET_FILTER, SET_SORT_COLUMN } from '../actions/actions.js';
   }
 }
 
- function sortColumn(state = 'title', action) {
+ function sortColumn(state = 'Title', action) {
   switch (action.type) {
     case SET_SORT_COLUMN:
       return action.value;
