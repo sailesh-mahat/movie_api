@@ -30,13 +30,11 @@ import { SET_MOVIES, SET_FILTER, SET_SORT_COLUMN } from '../actions/actions.js';
   }
 }
 
- function moviesApp(state = {}, action) {
-  return {
-    visibilityFilter: visibilityFilter(state.visibilityFilter, action),
-    sortColumn: sortColumn(state.sortColumn, action),
-    movies: movies(state.movies, action)
-  }
-}
+const moviesApp = combineReducers({
+ visibilityFilter,
+ sortColumn,
+ movies
+});
 
 
  export default moviesApp;
