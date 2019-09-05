@@ -18,14 +18,46 @@ export class ProfileView extends React.Component {
       password: null,
       email: null,
       birthday: null,
-      favoriteMovies: []
+      favoriteMovies: [],
+      usernameForm: null,
+      passwordForm: null,
+      emailForm: null,
+      birthdayForm: null
     };
   }
 
+  componentDidMount() {
+      //authentication
+      let accessToken = localStorage.getItem('token');
+      if (accessToken !== null) {
+        this.getUser(accessToken);
+      }
+    }
+
+    //get user
+      getUser(token) {
+        let username = localStorage.getItem('user');
+        axios.get(`https://myflixapp.herokuapp.com/users/${username}`, {
+          headers: { Authorization: `Bearer ${token}`}
+        })
+        .then(response => {
+          this.setState({
+            userData: response.data,
+            username: response.data.Username,
+            password: response.data.Password,
+            email: response.data.Email,
+            birthday: response.data.Birthday,
+            favoriteMovies: response.data.FavoriteMovies
+          });
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      }
 
   deleteUser(event) {
     event.preventDefault();
-    axios.delete(`https://myflixapp.herokuapp.com/users/${this.props.user.Username}`, {
+    axios.delete(`https://myflixapp.herokuapp.com/users/${localStorage.getItem('user')}`, {
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}`}
     })
     .then(response => {
@@ -45,7 +77,7 @@ export class ProfileView extends React.Component {
     deleteMovie(event, favoriteMovie) {
       event.preventDefault();
       console.log(favoriteMovie);
-      axios.delete(`https://myflixapp.herokuapp.com/users/${this.props.user.Username}/movies/${favoriteMovie}`, {
+      axios.delete(`https://myflixapp.herokuapp.com/users/${localStorage.getItem('user')}/movies/${favoriteMovie}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}`}
       })
       .then(response => {
@@ -66,11 +98,11 @@ export class ProfileView extends React.Component {
     handleSubmit(event) {
       event.preventDefault();
       console.log(this.state);
-      axios.put(`https://myflixapp.herokuapp.com/users/${this.props.user.Username}`, {
-        Username: this.state.username,
-        Password: this.state.password,
-        Email: this.state.email,
-        Birthday: this.state.birthday
+      axios.put(`https://myflixapp.herokuapp.com/users/${localStorage.getItem('user')}`, {
+        Username: this.state.usernameForm,
+        Password: this.state.passwordForm,
+        Email: this.state.emailForm,
+        Birthday: this.state.birthdayForm
       }, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}`}
       })
