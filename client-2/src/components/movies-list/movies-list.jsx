@@ -20,7 +20,7 @@ const mapStateToProps = state => {
   if (visibilityFilter !== '' && sortColumn === 'Title') {
     moviesToShow = moviesToShow.filter(movie => movie.Title.toLowerCase().includes(visibilityFilter.toLowerCase()));
   }
-  
+
   if (visibilityFilter !== '' && sortColumn === 'Genre') {
     moviesToShow = moviesToShow.filter(movie => movie.Genre.Name.toLowerCase().includes(visibilityFilter.toLowerCase()));
   }
@@ -38,6 +38,7 @@ function MoviesList(props) {
   if (!movies) return <div className="main-view" />;
 
   return <div className="movie-list">
+  <VisibilityFilterInput />
     <Container>
       <Row>
       {movies.map(movie => (

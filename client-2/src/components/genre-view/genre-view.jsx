@@ -14,7 +14,7 @@ import './genre-view.scss';
 
     if (!movies || !movies.length) return null;
 
-    const genre = movies.find(movie => movie.Genre.Name == genreName).Genre;
+    const genre = movies.find(movie => movie.Genre.Name === genreName).Genre;
 
     return (
       <div className="genre-view">

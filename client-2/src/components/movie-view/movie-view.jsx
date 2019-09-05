@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 
 import Container from 'react-bootstrap/Container';
 
-import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 
@@ -15,7 +14,7 @@ function MovieView(props) {
 
     if (!movies || !movies.length) return null;
 
-    const movie = movies.find(movie => movie._id == movieId);
+    const movie = movies.find(movie => movie._id === movieId);
 
   function handleSubmit(event) {
     event.preventDefault();

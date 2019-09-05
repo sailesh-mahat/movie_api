@@ -12,7 +12,7 @@ function DirectorView(props) {
 
   if (!movies || !movies.length) return null;
 
-  const director = movies.find(movie => movie.Director.Name == directorName).Director;
+  const director = movies.find(movie => movie.Director.Name === directorName).Director;
 
   return (
     <div className="director-view">
