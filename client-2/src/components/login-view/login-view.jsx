@@ -16,10 +16,9 @@ export function LoginView(props) {
 
   const handleLogin = (e) => {
     e.preventDefault();
-  /* Send a request to the server for authentication */
-  axios.post('https://myflixapp.herokuapp.com/login', {
-    Username: username,
-    Password: password
+    axios.post('https://myflixapp.herokuapp.com/login', {
+      Username: username,
+      Password: password
   })
   .then(response => {
     const data = response.data;
@@ -34,14 +33,17 @@ export function LoginView(props) {
       <Container className='login-view'>
         <h1>Welcome to MyFlix! </h1>
         <Form>
+
         <Form.Group controlId="formBasicEmail">
           <Form.Label >Username</Form.Label>
           <Form.Control type="text" value={username} onChange={e => setUsername(e.target.value)} placeholder="Enter Username" />
         </Form.Group>
+
         <Form.Group controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Enter Password" />
         </Form.Group>
+
         <Button variant="primary" type="button" className="btn btn-dark" onClick={handleLogin}>
         LOGIN
         </Button>
@@ -56,7 +58,5 @@ export function LoginView(props) {
 }
 
 LoginView.propTypes = {
-    username: PropTypes.string.isRequired,
-    password: PropTypes.string.isRequired,
-    NewUser: PropTypes.func.isRequired,
+  onLoggedIn: PropTypes.func.isRequired
 };

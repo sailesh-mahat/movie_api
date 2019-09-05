@@ -72,7 +72,9 @@ getMovies(token) {
 
   onLoggedIn(authData) {
     console.log(authData.user);
-
+    this.setState({
+      user: authData.user.Username
+    });
 
     this.props.setLoggedInUser(authData.user);
     localStorage.setItem('token', authData.token);
@@ -92,6 +94,7 @@ getMovies(token) {
       //clears storage
       localStorage.removeItem('token');
       localStorage.removeItem('user');
+      localStorage.removeItem('movies');
 
       //resets user state to render again
       this.setState({
