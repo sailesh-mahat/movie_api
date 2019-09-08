@@ -132,16 +132,16 @@ export class ProfileView extends React.Component {
   }
 
   render() {
-    const {user, movies} = this.props;
+    const {userData, username, email, birthday, favoriteMovies} = this.props;
 
-    if (!user) return null;
+    if (!userData) return null;
 
     return (
       <div className="profile-view">
       <h1>Your Profile Data</h1>
         <div className="username">
           <div className="label">Name:</div>
-          <div className="value">{user.Username}</div>
+          <div className="value">{username}</div>
         </div>
         <div className="password">
           <div className="label">Password:</div>
@@ -149,26 +149,26 @@ export class ProfileView extends React.Component {
         </div>
         <div className="birthday">
           <div className="label">Birthday:</div>
-          <div className="value">{user.Birthday}</div>
+          <div className="value">{birthday.substr(-24, 10)}</div>
         </div>
         <div className="email">
           <div className="label">Email:</div>
-          <div className="value">{user.Email}</div>
+          <div className="value">{email}</div>
         </div>
         <div className="favoriteMovies">
           <div className="label">Favorite Movies:</div>
             {
-              user.FavoriteMovies.length === 0 &&
+              favoriteMovies.length === 0 &&
               <div className="value">Your Favorite Movie List is empty.
               </div>
             }
             {
-              user.FavoriteMovies.length > 0 &&
-              <div className="value">{user.FavoriteMovies.map(favoriteMovie =>
-                (<p key={favoriteMovie}>{movies.find(movie =>
-                  movie._id === favoriteMovie).Title}<span onClick={(event) =>
-                    this.deleteMovie(event, favoriteMovie)}> Delete</span></p>))}
-              </div>
+              favoriteMovies.length > 0 &&
+              <div className="value favorite-movies">{favoriteMovies.map(favoriteMovie =>
+                (<div className="movie-image" key={favoriteMovie}>
+                <img src={JSON.parse(localStorage.getItem('movies')).find(movie =>
+                  movie._id === favoriteMovie).ImagePath} alt="Movie Cover"/><span onClick={(event) =>
+                     this.deleteMovie(event, favoriteMovie)}> Delete</span></div>))}</div>
             }
                 </div>
         <Link to={'/'}>
