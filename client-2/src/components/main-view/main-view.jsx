@@ -113,31 +113,34 @@ getMovies(token) {
 
     return (
       <Router>
-      <Container className="main-view">
-        <Button type="button" className="btn btn-light btn-sm" onClick={() => this.logOut()}>Log out</Button>
-        <Link to={'/profile'}>
+        <Container className="main-view">
+          <Button type="button" className="btn btn-light btn-sm" onClick={() => this.logOut()}>Log out</Button>
+          <Link to={'/profile'}>
               <Button type="button" className="btn btn-light btn-sm">My Profile</Button>
-        </Link>
+              </Link>
 
-        <Route exact path="/" render={() => {
-            if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
-            return <MoviesList />;
-            }}
-          />
+            <Route exact path="/" render={() => {
+                if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+                return <MoviesList />;
+                }}
+              />
 
-        <Route exact path="/movies/:id" render={({ match }) =>
-        <MovieView movieId={match.params.id}/>}/>
-
-
-        <Route exact path="/genres/:name" render={({ match }) => <GenreView genreName={match.params.name}/>}/>
-
-        <Route exact path="/directors/:name" render={({ match }) => <DirectorView directorName={match.params.name}/>}/>
+            <Route exact path="/movies/:id" render={({ match }) =>
+            <MovieView movieId={match.params.id}/>}/>
 
 
-        <Route exact path="/register" render={() =>
-          <RegistrationView UserRegistered={user => this.UserRegistered(user)} />} />
+            <Route exact path="/genres/:name" render={({ match }) => <GenreView genreName={match.params.name}/>}/>
 
-          <Route exact path="/profile" render={() => <ProfileView />}/>
+            <Route exact path="/directors/:name" render={({ match }) => <DirectorView directorName={match.params.name}/>}/>
+
+
+            <Route exact path="/register" render={() =>
+              <RegistrationView UserRegistered={user => this.UserRegistered(user)} />} />
+
+            <Route exact path="/profile" render={() => <ProfileView />}/>
+          //  <Route exact path="/users/:Username" render={() => <ProfileView />}/>
+          
+
           </Container>
       </Router>
     );
