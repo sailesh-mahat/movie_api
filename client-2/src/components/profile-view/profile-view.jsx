@@ -97,7 +97,7 @@ export class ProfileView extends React.Component {
     //update user data
     handleSubmit(event) {
       event.preventDefault();
-      console.log(this.state);
+      console.log(this.state.username);
       axios.put(`https://myflixapp.herokuapp.com/users/${localStorage.getItem('user')}`, {
         Username: this.state.usernameForm,
         Password: this.state.passwordForm,
@@ -132,7 +132,7 @@ export class ProfileView extends React.Component {
   }
 
   render() {
-    const {userData, username, email, birthday, favoriteMovies} = this.props;
+    const {userData, username, email, birthday, favoriteMovies} = this.state;
 
     if (!userData) return null;
 
@@ -187,7 +187,7 @@ export class ProfileView extends React.Component {
           <h2>Change Data</h2>
           <Form.Group controlId="formBasicUsername">
             <Form.Label >Your Username</Form.Label>
-            <Form.Control type="text" name="username" onChange={event => this.handleChange(event)} placeholder="Enter Username" />
+            <Form.Control type="text" name="usernameForm" onChange={event => this.handleChange(event)} placeholder="Enter Username" />
             <Form.Text className="text-muted">
             Type your username here.
             </Form.Text>
@@ -195,17 +195,17 @@ export class ProfileView extends React.Component {
 
           <Form.Group controlId="formBasicPassword">
             <Form.Label>Your Password</Form.Label>
-            <Form.Control type="password" name="password" onChange={event => this.handleChange(event)} placeholder="Enter Password" />
+            <Form.Control type="password" name="passwordForm" onChange={event => this.handleChange(event)} placeholder="Enter Password" />
           </Form.Group>
 
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Your Email</Form.Label>
-            <Form.Control type="email" name="email" onChange={event => this.handleChange(event)} placeholder="example@ema.il" />
+            <Form.Control type="email" name="emailForm" onChange={event => this.handleChange(event)} placeholder="example@ema.il" />
           </Form.Group>
 
           <Form.Group controlId="formBasicBirthday">
             <Form.Label>Your Birthday</Form.Label>
-            <Form.Control type="date" placeholder="01.01.2000" name="birthday" onChange={event => this.handleChange(event)} />
+            <Form.Control type="date" placeholder="01.01.2000" name="birthdayForm" onChange={event => this.handleChange(event)} />
           </Form.Group>
 
           <Button variant="dark" type="button" onClick={event => this.handleSubmit(event)} >
