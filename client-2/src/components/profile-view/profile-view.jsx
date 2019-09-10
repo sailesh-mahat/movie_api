@@ -120,7 +120,6 @@ export class ProfileView extends React.Component {
 
 //toggle change data form
   toggleForm() {
-    console.log(this.props.user.FavoriteMovies);
     let form = document.getElementsByClassName('changeDataForm')[0];
     let toggleButton = document.getElementById('toggleButton');
     form.classList.toggle('show-form');
