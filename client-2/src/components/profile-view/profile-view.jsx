@@ -165,7 +165,7 @@ export class ProfileView extends React.Component {
               favoriteMovies.length > 0 &&
               <div className="value favorite-movies">{favoriteMovies.map(favoriteMovie =>
                 (<div className="movie-image" key={favoriteMovie}>
-                <img src={JSON.parse(localStorage.getItem('movies')).find(movie =>
+                <img className="movie-poster" src={JSON.parse(localStorage.getItem('movies')).find(movie =>
                   movie._id === favoriteMovie).ImagePath} alt="Movie Cover"/><span onClick={(event) =>
                      this.deleteMovie(event, favoriteMovie)}> Delete</span></div>))}</div>
             }

@@ -36,8 +36,8 @@ function MovieView(props) {
 
 
     return (
-      <Container className="movie-view">
-
+      //<Container className="movie-view">
+      <div className="movie-view">
         <div className="movie-title">
           <h1>{movie.Title}</h1>
         </div>
@@ -69,11 +69,11 @@ function MovieView(props) {
             Director
             </Button>
           </Link>
-          <Button className="view-btn" variant="dark" type="button" onClick={event => handleSubmit(event)}>
+          <Button className="view-btn" variant="success" type="button" onClick={event => handleSubmit(event)}>
             Add to favorites
           </Button>
-
-        </Container>
+          </div>
+        //</Container>
     );
   }
 

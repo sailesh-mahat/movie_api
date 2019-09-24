@@ -138,7 +138,7 @@ getMovies(token) {
               <RegistrationView UserRegistered={user => this.UserRegistered(user)} />} />
 
             <Route exact path="/profile" render={() => <ProfileView />}/>
-          
+
 
           </Container>
       </Router>
