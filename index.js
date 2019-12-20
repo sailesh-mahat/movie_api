@@ -1,9 +1,21 @@
-//importing express, and morgan (for logging)
+/**
+* @description Index.js manages all HTTP requests
+* @class Router
+* @requires express, a server framework for Node.js
+* @requires body-parser, a parsing middleware for node.js that is needed to read HTTP POST data which is stored in req.body
+* @requires uuid, which generates user ids
+* @requires mongoose, an object data modeling library (ODM) for MongoDB database
+* @requires passport, authentication middleware for Node.js
+* @requires cors, Express middleware that manages the CORS settings (Cross-Origin-Resource-Sharing)
+* @requires validator, Express middleware that provide validators sanitizer functions
+* @requires path, part of Node.js core, manages file and folder paths
+*/
 const express = require('express'),
       morgan = require('morgan'),
       bodyParser = require('body-parser'),
       uuid = require('uuid'),
       mongoose = require('mongoose'),
+      /** @requires models.js, contains the data schema for this application */
       Models = require('./models.js'),
       passport = require('passport');
       require('./passport');
@@ -11,7 +23,7 @@ const validator = require('express-validator');
 const cors = require('cors');
 
 
-
+/** @const app encapsulate express functionality */
 const app = express();
 //for serving static files
 app.use(express.static('public'));
@@ -19,7 +31,9 @@ app.use(express.static('public'));
 app.use(cors());
 app.use(validator());
 
+/** @const Movies data schema for Movies object  */
 const Movies = Models.Movie;
+/** @const Users data schema for Users object  */
 const Users = Models.User;
 // allows Mongoose to connect to the database thus integrating it with the REST API
 //mongoose.connect('mongodb://localhost:27017/myFlixDB', {useNewUrlParser: true});
