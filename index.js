@@ -430,7 +430,8 @@ app.delete('/users/:Username/movies/:movieid', passport.authenticate('jwt', { se
 *}
 *example response:
 * username was deleted
-*/app.delete('/users/:Username', passport.authenticate('jwt', { session: false }), function (req, res) {
+*/
+app.delete('/users/:Username', passport.authenticate('jwt', { session: false }), function (req, res) {
   Users.findOneAndRemove({Username : req.params.Username})
   .then(function(user) {
     if(!user) {
