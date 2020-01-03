@@ -21,6 +21,8 @@ const express = require('express'),
       require('./passport');
 const validator = require('express-validator');
 const cors = require('cors');
+const path = require('path');
+
 
 
 /** @const app encapsulate express functionality */
@@ -455,6 +457,11 @@ app.use(function (err, req, res, next) {
 });
 
 
+//Deploy to heroku
+app.use(express.static(path.join(__dirname, 'client-2/build')))
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/client-2/build/index.html'))
+});
  //listen for requests
 /*app.listen(8080, () =>
   console.log('Your app is listening on port 8080.')
