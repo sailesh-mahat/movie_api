@@ -63,12 +63,6 @@ app.use(cors({
 }));*/
 
 
-//using mongoose logic
-
-app.get('/', function (req, res) {
-  res.send('Welcome to MyFlix!')
-});
-
 //Returns a JSON object containing data about all users
 app.get('/users/', passport.authenticate('jwt', { session: false }), function(req, res) {
   Users.find()
@@ -456,15 +450,10 @@ app.use(function (err, req, res, next) {
   res.status(500).send('Something broke!');
 });
 
-
-if (process.env.NODE_ENV === 'production') {
-  // Serve any static files
-  app.use(express.static(path.join(__dirname, 'client-2/build')));
-// Handle React routing, return all requests to React app
-  app.get('*', function(req, res) {
-    res.sendFile(path.join(__dirname, 'client-2/src/components/login-view', 'login-view.jsx'));
-  });
-}
+app.use(express.static(path.join(__dirname, 'client-2/build')))
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client-2/build', 'index.html'))
+});
 
  //listen for requests
 /*app.listen(8080, () =>
