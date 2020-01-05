@@ -2,7 +2,6 @@
   "name": "client-2",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://sailesh-mahat.github.io/movie_api",
   "dependencies": {
     "axios": "^0.19.0",
     "babel": "^6.23.0",
@@ -15,7 +14,8 @@
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.1.1",
     "redux": "^4.0.4",
-    "typescript": "^3.5.3"
+    "typescript": "^3.5.3",
+    "node-sass": "^4.12.0"
   },
   "scripts": {
     "start": "react-scripts start",
